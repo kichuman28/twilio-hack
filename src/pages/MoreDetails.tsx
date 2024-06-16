@@ -29,7 +29,6 @@ const MoreDetailsPage = () => {
       <img
         src={signup}
         alt="signup"
-        // className="mb-4 sm:mb-8 w-full max-w-xs sm:max-w-sm lg:max-w-full mx-auto"
         className="md:w-80 w-44 mx-auto h-auto"
       />
       <div className="flex flex-col gap-8 sm:gap-16">
