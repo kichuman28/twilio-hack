@@ -17,14 +17,14 @@ const FamilyIdPage = () => {
   };
 
   return (
-    <div className="px-4 py-6 sm:px-10 sm:py-10 flex flex-col min-h-screen justify-evenly lg:max-w-[40%] lg:mx-auto">
+    <div className="px-4 sm:px-10 flex flex-col min-h-screen justify-evenly lg:max-w-[40%] lg:mx-auto">
       <img 
         src={family} 
         alt="family" 
-        className="mb-4 sm:mb-8 w-full max-w-md sm:max-w-lg lg:max-w-full mx-auto" 
+        className="h-52 w-auto mx-auto" 
       />
-      <div className="flex flex-col gap-8 sm:gap-16">
-        <h2 className="font-bold text-4xl sm:text-5xl w-full sm:w-[75%] leading-snug text-black mx-auto sm:mx-0 text-center sm:text-left">
+      <div className="flex flex-col md:gap-2">
+        <h2 className="font-bold text-5xl w-full leading-snug text-black mx-auto sm:mx-0 text-center">
           Join Your Family.
         </h2>
         <div className="FormContainer space-y-4 sm:space-y-6">
@@ -36,10 +36,11 @@ const FamilyIdPage = () => {
             type="text"
             error={!formData.familyid}
           />
-          <h3 className="text-sm sm:text-base">If you don't have a family created by any of your family members, you can create one.</h3>
+          <h3 className="text-sm font-medium text-center sm:text-base">If you don't have a family created by any of your family members, you can create one.</h3>
         </div>
       </div>
-      <div className="pt-4 sm:pb-4 w-full sm:w-auto">
+      <div className="flex flex-col gap-8 w-full">
+        <PrimaryButton label="Create a Family" onClick={() => {}} />
         <PrimaryButton label="Continue" onClick={() => {}} />
       </div>
     </div>
