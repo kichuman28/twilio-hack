@@ -1,7 +1,10 @@
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
+import signup from "../assets/signup.png";
 import InputBoxCustom from "../components/InputBoxCustom";
 import PrimaryButton from "../components/PrimaryButton";
-import signup from '../assets/signup.png';
+//@ts-expect-error No type declaration
+import { CountrySelect } from "react-country-state-city";
+import "react-country-state-city/dist/react-country-state-city.css";
 
 const MoreDetailsPage = () => {
   const [formData, setFormData] = useState({
@@ -23,7 +26,12 @@ const MoreDetailsPage = () => {
 
   return (
     <div className="px-4 py-6 sm:px-10 sm:py-10 flex flex-col min-h-screen justify-between lg:max-w-[40%] lg:mx-auto">
-      <img src={signup} alt="signup" className="mb-4 sm:mb-8 w-full max-w-xs sm:max-w-sm lg:max-w-full mx-auto" />
+      <img
+        src={signup}
+        alt="signup"
+        // className="mb-4 sm:mb-8 w-full max-w-xs sm:max-w-sm lg:max-w-full mx-auto"
+        className="md:w-80 w-44 mx-auto h-auto"
+      />
       <div className="flex flex-col gap-8 sm:gap-16">
         <h2 className="font-bold text-3xl sm:text-5xl w-full sm:w-[75%] leading-snug text-black mx-auto sm:mx-0 text-center sm:text-left">
           We need a few more details to personalize your experience.
@@ -45,15 +53,17 @@ const MoreDetailsPage = () => {
             type="text"
             error={!formData.address}
           />
-          <InputBoxCustom
-            name="country"
-            value={formData.country}
-            onChange={handleChange}
-            placeholder="Country of residence"
-            type="text"
-            error={!formData.country}
+          <CountrySelect
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onChange={(e: { name: any }) => {
+              setFormData((prevData) => ({
+                ...prevData,
+                country: e.name,
+              }));
+            }}
+            placeHolder="Country of Residence"
           />
-          <div className="flex flex-col sm:flex-row gap-4 flex-1">
+          <div className="flex md:flex-col gap-4 flex-1">
             <InputBoxCustom
               name="weight"
               value={formData.weight}
