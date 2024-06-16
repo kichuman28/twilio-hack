@@ -6,6 +6,10 @@ import "./index.css";
 import OTPVerifyPage from "./pages/OTPVerify.tsx";
 import SigninPage from "./pages/Signin.tsx";
 import SignupPage from "./pages/Signup.tsx";
+import FamilyIdPage from "./pages/FamilyId.tsx";
+import MoreDetailsPage from "./pages/MoreDetails.tsx";
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -22,6 +26,14 @@ const router = createBrowserRouter([
   {
     path: "/otpverify",
     element: <OTPVerifyPage />,
+  },
+  {
+    path: "/details",
+    element: <MoreDetailsPage />,
+  },
+  {
+    path: "/familyid",
+    element: <FamilyIdPage />,
   },
 ]);
 
