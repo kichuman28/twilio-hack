@@ -1,17 +1,22 @@
 import { useState } from "react";
 import OTPInput from "react-otp-input";
 import PrimaryButton from "../components/PrimaryButton";
+import { useLocation } from "react-router-dom";
 
 const OTPVerifyPage = () => {
   const [otp, setOtp] = useState("");
-
+  const { state } = useLocation();
+  const { phone } = state;
   return (
     <div className="px-10 py-10 flex flex-col h-screen justify-between lg:max-w-[40%] lg:mx-auto">
       <div className="flex gap-16 flex-col">
         <h2 className="font-bold text-5xl w-[75%] leading-snug text-black">
           Verify your OTP{" "}
         </h2>
-        <p>An OTP has sent to your mobile number, enter your otp to proceed</p>
+        <p>
+          An OTP has sent to your mobile number {phone}, enter your otp to
+          proceed
+        </p>
         <OTPInput
           value={otp}
           onChange={setOtp}

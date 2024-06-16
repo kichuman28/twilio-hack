@@ -15,22 +15,29 @@ const MoreDetailsPage = () => {
     height: "",
     age: "",
   });
-
+  const [Touched, setTouched] = useState({
+    fullName: false,
+    address: false,
+    country: false,
+    weight: false,
+    height: false,
+    age: false,
+  });
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+    setTouched((prevTouched) => ({
+      ...prevTouched,
+      [name]: true,
+    }));
   };
 
   return (
     <div className="px-4 py-6 sm:px-10 sm:py-10 flex flex-col min-h-screen justify-between lg:max-w-[40%] lg:mx-auto">
-      <img
-        src={signup}
-        alt="signup"
-        className="md:w-80 w-44 mx-auto h-auto"
-      />
+      <img src={signup} alt="signup" className="md:w-80 w-44 mx-auto h-auto" />
       <div className="flex flex-col gap-8 sm:gap-16">
         <h2 className="font-bold text-3xl sm:text-5xl w-full sm:w-[75%] leading-snug text-black mx-auto sm:mx-0 text-center sm:text-left">
           We need a few more details to personalize your experience.
@@ -42,7 +49,7 @@ const MoreDetailsPage = () => {
             onChange={handleChange}
             placeholder="Full Name"
             type="text"
-            error={!formData.fullName}
+            error={!formData.fullName && Touched.fullName}
           />
           <InputBoxCustom
             name="address"
@@ -50,7 +57,7 @@ const MoreDetailsPage = () => {
             onChange={handleChange}
             placeholder="Address"
             type="text"
-            error={!formData.address}
+            error={!formData.address && Touched.address}
           />
           <CountrySelect
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -69,7 +76,7 @@ const MoreDetailsPage = () => {
               onChange={handleChange}
               placeholder="Weight"
               type="text"
-              error={!formData.weight}
+              error={!formData.weight && Touched.weight}
             />
             <InputBoxCustom
               name="height"
@@ -77,7 +84,7 @@ const MoreDetailsPage = () => {
               onChange={handleChange}
               placeholder="Height"
               type="text"
-              error={!formData.height}
+              error={!formData.height && Touched.height}
             />
             <InputBoxCustom
               name="age"
@@ -85,7 +92,7 @@ const MoreDetailsPage = () => {
               onChange={handleChange}
               placeholder="Age"
               type="text"
-              error={!formData.age}
+              error={!formData.age && Touched.age}
             />
           </div>
         </div>
