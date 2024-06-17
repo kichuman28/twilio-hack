@@ -1,11 +1,25 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import InputBoxCustom from "../components/InputBoxCustom";
 import PrimaryButton from "../components/PrimaryButton";
 import { handleRegistration } from "../utils/FirebaseFunctions";
 import { useNavigate } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { app } from "../utils/Firebase";
 
 const SignupPage = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    const auth = getAuth(app);
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/");
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, [navigate]);
+
   const [FormData, setFormData] = useState({
     email: "",
     password: "",
