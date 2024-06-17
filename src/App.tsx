@@ -1,19 +1,18 @@
-import { getAuth } from "firebase/auth";
-import { app } from "./utils/Firebase";
 import BottomBar from "./components/BottomBar";
+import ComponentCard from "./components/CommunityCard";
 
 const App = () => {
-  const auth = getAuth(app);
   return (
     <div>
-      <h2 className="text-2xl text-center font-bold">Hello Twilio Hack</h2>
-      <button
-        onClick={() => {
-          auth.signOut();
-        }}
-      >
-        Sign Out
-      </button>
+      <div className="Feed mx-auto md:max-w-[30%] px-6 py-4 mb-8">
+        <ComponentCard />
+        <ComponentCard />
+        <ComponentCard />
+        <ComponentCard />
+        <ComponentCard />
+        <ComponentCard />
+        <ComponentCard />
+      </div>
       <BottomBar />
     </div>
   );
