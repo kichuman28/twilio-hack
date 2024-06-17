@@ -13,28 +13,32 @@ import SignupPage from "./pages/Signup.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ProtectedRoute children={<App />} />,
+    element: <ProtectedRoute />,
     children: [
       {
-        path: "/otp-verify",
-        element: <OTPVerifyPage />,
+        path: "/",
+        element: <App />,
       },
       {
-        path: "/details",
-        element: <MoreDetailsPage />,
-      },
-      {
-        path: "/familyid",
+        path: "familyid",
         element: <FamilyIdPage />,
       },
     ],
   },
   {
-    path: "/signup",
+    path: "otp-verify",
+    element: <OTPVerifyPage />,
+  },
+  {
+    path: "more-details",
+    element: <MoreDetailsPage />,
+  },
+  {
+    path: "signup",
     element: <SignupPage />,
   },
   {
-    path: "/signin",
+    path: "signin",
     element: <SigninPage />,
   },
 ]);
