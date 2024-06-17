@@ -1,5 +1,6 @@
 import { getAuth } from "firebase/auth";
 import { app } from "./utils/Firebase";
+import BottomBar from "./components/BottomBar";
 
 const App = () => {
   const auth = getAuth(app);
@@ -10,7 +11,10 @@ const App = () => {
         onClick={() => {
           auth.signOut();
         }}
-      >Sign Out</button>
+      >
+        Sign Out
+      </button>
+      <BottomBar />
     </div>
   );
 };
