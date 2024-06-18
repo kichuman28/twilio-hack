@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import "./index.css";
+import CreatePost from "./pages/CreatePost.tsx";
 import FamilyIdPage from "./pages/FamilyId.tsx";
 import MoreDetailsPage from "./pages/MoreDetails.tsx";
 import OTPVerifyPage from "./pages/OTPVerify.tsx";
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <App />,
+      },
+      {
+        path: "/create-post",
+        element: <CreatePost />,
       },
       {
         path: "familyid",

@@ -4,13 +4,14 @@
 @tailwind utilities;
 
 
-* {
+body {
     font-family: "Lexend", sans-serif;
     font-optical-sizing: auto;
     /* font-weight: <weight>; */
     font-style: normal;
     color: #3F3F3F;
 }
-.stdropdown-item > span{
+
+.stdropdown-item>span {
     @apply mx-2
 }
