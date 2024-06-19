@@ -1,12 +1,19 @@
-import { ChangeEvent, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { ChangeEvent, useEffect, useState } from "react";
 import signup from "../assets/signup.png";
 import InputBoxCustom from "../components/InputBoxCustom";
 import PrimaryButton from "../components/PrimaryButton";
 //@ts-expect-error No type declaration
 import { CountrySelect } from "react-country-state-city";
 import "react-country-state-city/dist/react-country-state-city.css";
+import { useNavigate } from "react-router-dom";
+import { app } from "../utils/Firebase";
+import { isFirstLogin, registerUserDetails } from "../utils/FirebaseFunctions";
 
 const MoreDetailsPage = () => {
+  const auth = getAuth(app);
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     fullName: "",
     address: "",
@@ -34,7 +41,25 @@ const MoreDetailsPage = () => {
       [name]: true,
     }));
   };
+  const handleMoreDetailsSubmit = () => {
+    if (auth.currentUser) {
+      registerUserDetails(auth.currentUser.uid, formData).then(() => {
+        navigate("/");
+      });
+    }
+  };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const isFirst = await isFirstLogin(user.uid);
+        if (!isFirst) {
+          navigate("/");
+        }
+      }
+    });
+    return () => unsubscribe();
+  }, [auth, navigate]);
   return (
     <div className="px-4 py-6 sm:px-10 sm:py-10 flex flex-col min-h-screen justify-between lg:max-w-[40%] lg:mx-auto">
       <img src={signup} alt="signup" className="md:w-80 w-44 mx-auto h-auto" />
@@ -74,16 +99,16 @@ const MoreDetailsPage = () => {
               name="weight"
               value={formData.weight}
               onChange={handleChange}
-              placeholder="Weight"
-              type="text"
+              placeholder="Weight (Kg)"
+              type="number"
               error={!formData.weight && Touched.weight}
             />
             <InputBoxCustom
               name="height"
               value={formData.height}
               onChange={handleChange}
-              placeholder="Height"
-              type="text"
+              placeholder="Height (cm)"
+              type="number"
               error={!formData.height && Touched.height}
             />
             <InputBoxCustom
@@ -91,14 +116,25 @@ const MoreDetailsPage = () => {
               value={formData.age}
               onChange={handleChange}
               placeholder="Age"
-              type="text"
+              type="number"
               error={!formData.age && Touched.age}
             />
           </div>
         </div>
       </div>
       <div className="pt-4 sm:pb-4 w-full sm:w-auto">
-        <PrimaryButton label="Continue" onClick={() => {}} />
+        <PrimaryButton
+          disabled={
+            !formData.fullName ||
+            !formData.address ||
+            !formData.age ||
+            !formData.country ||
+            !formData.height ||
+            !formData.weight
+          }
+          label="Continue"
+          onClick={handleMoreDetailsSubmit}
+        />
       </div>
     </div>
   );

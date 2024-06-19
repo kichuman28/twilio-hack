@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.tsx";
 import ProtectedRoute from "./components/ProtectedRoute.tsx";
 import "./index.css";
+import CreatePost from "./pages/CreatePost.tsx";
 import FamilyIdPage from "./pages/FamilyId.tsx";
 import MoreDetailsPage from "./pages/MoreDetails.tsx";
 import OTPVerifyPage from "./pages/OTPVerify.tsx";
@@ -13,28 +14,36 @@ import SignupPage from "./pages/Signup.tsx";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <ProtectedRoute children={<App />} />,
+    element: <ProtectedRoute />,
     children: [
       {
-        path: "/otp-verify",
-        element: <OTPVerifyPage />,
+        path: "/",
+        element: <App />,
       },
       {
-        path: "/details",
-        element: <MoreDetailsPage />,
+        path: "/create-post",
+        element: <CreatePost />,
       },
       {
-        path: "/familyid",
+        path: "familyid",
         element: <FamilyIdPage />,
       },
     ],
   },
   {
-    path: "/signup",
+    path: "otp-verify",
+    element: <OTPVerifyPage />,
+  },
+  {
+    path: "more-details",
+    element: <MoreDetailsPage />,
+  },
+  {
+    path: "signup",
     element: <SignupPage />,
   },
   {
-    path: "/signin",
+    path: "signin",
     element: <SigninPage />,
   },
 ]);
